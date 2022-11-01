@@ -16,6 +16,8 @@ services:
     # command: ['celery','-A','task_celery.tasks', 'worker', '--loglevel=info']
     depends_on:
       - rabbit
+    volumes:
+      - .:/app
     
 
   # consumer:
