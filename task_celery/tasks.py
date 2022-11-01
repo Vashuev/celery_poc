@@ -4,15 +4,16 @@ import time
 
 # Celery Initiated
 app = Celery("task_celery",
-    broker='amqps://kponkjec:NOObx-xwGarzBp3GhYk4X4bOiQTPx_Z8@puffin.rmq2.cloudamqp.com/kponkjec',
-    backend='rpc://'
+    broker='amqp://admin:mypass@rabbit:5672',
+    backend='rpc://',
+    include=["task_celery.tasks"]
 )
 
 logger = get_task_logger(__name__)
 
 # Celery Task
-@app.task(bind=True, name='task_celery.tasks.sum')
-def sum(self, x, y):
+@app.task
+def sum(x, y):
     logger.info(f"task-{x} with args {x} + {y}")
     time.sleep(5)
     logger.info(f"task-{x} Finished")
