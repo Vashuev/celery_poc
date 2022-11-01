@@ -13,7 +13,15 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - .:/app
+    command: ['celery','-A','task_celery.tasks', 'worker', '--loglevel=info']
     depends_on:
       - rabbit
+
+  consumer:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command : ['python3', 'task_celery/consumer.py']
+    depends_on:
+      - rabbit
+      - worker
