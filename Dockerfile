@@ -1,6 +1,6 @@
 FROM python:3.10.2
-ADD requirements.txt ./
+ADD requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
-COPY . /
+ADD ./task_celery/ /app/task_celery/
 WORKDIR /
