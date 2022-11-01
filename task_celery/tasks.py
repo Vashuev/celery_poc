@@ -4,8 +4,8 @@ import time
 
 # Celery Initiated
 app = Celery("task_celery",
-    ##broker='amqp://admin:mypass@rabbit:5672',
-    broker = 'amqps://kponkjec:C5UBm8LH6_hm1rP9aelB4oBzewjT1OXm@puffin.rmq2.cloudamqp.com/kponkjec',
+    broker='amqp://admin:mypass@rabbit:5672',
+    # broker = 'amqps://kponkjec:C5UBm8LH6_hm1rP9aelB4oBzewjT1OXm@puffin.rmq2.cloudamqp.com/kponkjec',
     backend='rpc://'
 )
 
