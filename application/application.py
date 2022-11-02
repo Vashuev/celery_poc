@@ -14,7 +14,7 @@ app = Celery(
     # backend = 'rpc://kponkjec:C5UBm8LH6_hm1rP9aelB4oBzewjT1OXm@puffin.rmq2.cloudamqp.com/kponkjec',
 )
 
-numTasks = 5
+numTasks = 100
 tasks = []
 
 for i in range(numTasks):
