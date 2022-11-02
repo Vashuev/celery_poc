@@ -1,6 +1,6 @@
 version: '3.3'
 services: 
-  rabbit:
+  rabbitmq:
     hostname: rabbit
     image: rabbitmq:latest
     environment:
@@ -10,21 +10,18 @@ services:
         - "5673:5672"
 
   worker:
-    build: 
-      context: .
+    image: worker
+    build:
+      context: ./worker
       dockerfile: Dockerfile
-    command: ['celery','-A','task_celery.tasks', 'worker', '--loglevel=info']
     depends_on:
-      - rabbit
-    volumes:
-      - .:/app
-    
+      - rabbitmq
 
-  consumer:
-    build: 
-      context: .
+  application:
+    image: application
+    build:
+      context: ./application
       dockerfile: Dockerfile
-    command : ['python3', 'task_celery/consumer.py']
     depends_on:
-      - rabbit
+      - rabbitmq
       - worker
